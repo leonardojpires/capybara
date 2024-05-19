@@ -57,8 +57,8 @@ nav a:hover {
 
 main {
     background-color: white;
-    width: 750px;
-    margin: auto;
+    width: 1200px;
+    margin: 50px auto;
     padding: 20px;
 }
 
@@ -71,4 +71,62 @@ main h1 {
 main p {
     color: black;
     text-align: justify;
+}
+
+main section {
+    margin-bottom: 20px;
+}
+
+section#introduction img, section#introduction p {
+    margin-top: 20px;
+}
+
+section#capy-diet img {
+    width: 400px;
+    margin: 10px;
+    margin-left: 100px;
+}
+
+section#capy-diet p {
+    width: 600px;
+    margin: 10px;
+}
+
+div#background {
+    background: white url("../imagens/forest2.jpg") no-repeat bottom center;
+    background-size: cover;
+    height: 500px;
+    position: relative;
+}
+
+div#capybara-div {
+    background: url("../imagens/capybara_div.png") no-repeat center center;
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 25%;
+}
+
+div#plant {
+    background: url("../imagens/plant.png") no-repeat center center;
+    width: 254px;
+    height: 254px;
+    position: absolute;
+    left: 10%;
+    top: 50%;
+}
+
+.container {
+    display: flex;
+    
+}
+
+.container img {
+    margin-right: 20px;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column
 }
