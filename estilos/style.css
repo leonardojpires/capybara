@@ -124,6 +124,40 @@ div#plant {
     top: 50%;
 }
 
+div#bckg {
+    background: white url("../imagens/lake.jpg") no-repeat center center;
+    background-size: contain;
+    background-attachment: fixed;
+}
+
+div#imgs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    gap: 16px;
+    max-width: 900px;
+    margin: auto;
+    position: relative;
+}
+    
+.card {
+    background-color: #fff;
+    margin: 10px;
+    width: 260px;
+    height: 260px;
+    border-radius: 12px;
+    box-shadow: 4px 4px 5px #00000091;
+    transition: 0.5s;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
 #hidden-section {
     display: none;
 }
@@ -140,4 +174,8 @@ div#plant {
 .text-content {
     display: flex;
     flex-direction: column
+}
+
+.hover {
+    transform: scale(1.1);
 }

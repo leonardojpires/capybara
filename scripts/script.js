@@ -52,3 +52,21 @@ plant.ondragstart = function() {
     return false;
 }
 
+const cards = document.querySelectorAll(".card");
+
+function handleMouseOver(event) {
+    const card = event.currentTarget;
+    console.log("A");
+    card.classList.add("hover");
+}
+
+function handleMouseOut(event) {
+    const card = event.currentTarget;
+    console.log("B");
+    card.classList.remove("hover");
+}
+
+cards.forEach(card => {
+    card.addEventListener("mouseover", handleMouseOver);
+    card.addEventListener("mouseout", handleMouseOut);
+})
