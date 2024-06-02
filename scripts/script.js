@@ -4,15 +4,8 @@ var capybara = document.getElementById("capybara-div")
 var feed_capy= document.getElementById("feed-capy");
 var hidden_section = document.getElementById("hidden-section");
 
-let plantCollider;
-let capybaraCollider;
-
-
 let plantWidth = plant.offsetWidth;
 let plantHeight = plant.offsetHeight;
-
-let capybaraWidth = capybara.offsetWidth;
-let capybaraHeight = capybara.offsetHeight;
 
 plant.onmousedown = function(event) {
     plant.style.position = "absolute";
