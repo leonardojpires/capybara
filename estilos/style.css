@@ -40,20 +40,41 @@ nav {
     background-color: darkgray;
     text-align: right;
     padding: 20px;
+    height: 20px;
+    overflow: hidden;
 }
 
 nav a {
-    margin: 10px;
+    margin: 15px;
     padding: 10px;
     text-decoration: none;
     font-weight: bold;
+    position: relative;
     color: white;
+}
+
+nav a:active {
+    color: green;
+}
+
+nav a::after {
+    content: " ";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s; 
 }
 
 nav a:hover {
     background-color: black;
-    transition-duration: .5s;
-    border-radius: 50px;
+    border-radius: 10px;
+}
+
+nav a:hover::after {
+    content: "🌲";
+    opacity: 1;
 }
 
 main {
@@ -128,6 +149,8 @@ div#bckg {
     background: white url("../imagens/lake.jpg") no-repeat center center;
     background-size: contain;
     background-attachment: fixed;
+    height: 700px;
+    position: relative;
 }
 
 div#imgs {
@@ -138,8 +161,10 @@ div#imgs {
     font-family: Arial, Helvetica, sans-serif;
     gap: 16px;
     max-width: 900px;
+    position: absolute;
     margin: auto;
-    position: relative;
+    top: 9%;
+    left: 13%;
 }
     
 .card {

@@ -36,10 +36,10 @@ plant.onmousedown = function(event) {
         var plantRect = plant.getBoundingClientRect();
         var capybaraRect = capybara.getBoundingClientRect();
 
-        if (plantRect.left < capybaraRect.left + capybaraRect.width &&
-            plantRect.left + plantRect.width > capybaraRect.left &&
-            plantRect.top < capybaraRect.top + capybaraRect.height &&
-            plantRect.top + plantRect.height > capybaraRect.top) 
+        if (plantRect.left < capybaraRect.left + capybaraRect.width - 200 &&
+            plantRect.left + plantRect.width > capybaraRect.left + 150  &&
+            plantRect.top < capybaraRect.top + capybaraRect.height - 200  &&
+            plantRect.top + plantRect.height > capybaraRect.top + 200 ) 
             {
             plant.style.display = "none";
             feed_capy.style.display = "none";
@@ -51,6 +51,8 @@ plant.onmousedown = function(event) {
 plant.ondragstart = function() {
     return false;
 }
+
+// ------------------------------------------
 
 const cards = document.querySelectorAll(".card");
 
