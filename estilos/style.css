@@ -64,15 +64,16 @@ nav a::after {
     height: 20px;
     position: absolute;
     opacity: 0;
-    transition: opacity 0.5s; 
 }
 
 nav a:hover {
     background-color: black;
     border-radius: 10px;
+    
 }
 
 nav a:hover::after {
+    background-color: black;
     content: "🌲";
     opacity: 1;
 }
