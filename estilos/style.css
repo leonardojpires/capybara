@@ -41,20 +41,22 @@ nav {
     text-align: right;
     padding: 20px;
     height: 20px;
-    overflow: hidden;
 }
 
 nav a {
     margin: 15px;
     padding: 10px;
     text-decoration: none;
+    font-size: 1.3em;
     font-weight: bold;
     position: relative;
     color: white;
 }
 
-nav a:active {
-    color: green;
+nav a:hover {
+    background-color: black;
+    border-radius: 10px;
+    transition: 0.5s;
 }
 
 nav a::after {
@@ -63,19 +65,16 @@ nav a::after {
     width: 20px;
     height: 20px;
     position: absolute;
-    opacity: 0;
-}
-
-nav a:hover {
-    background-color: black;
-    border-radius: 10px;
-    
+    opacity: 1;
+    left: 50%;
+    top: -25%;
+    transform: translateX(-50%);
 }
 
 nav a:hover::after {
-    background-color: black;
     content: "🌲";
-    opacity: 1;
+    color: white;
+    transition: 0.5s;
 }
 
 main {
@@ -83,6 +82,8 @@ main {
     width: 1200px;
     margin: 50px auto;
     padding: 20px;
+    min-width: 300px;
+    max-width: 1257px;
 }
 
 main h1 {
@@ -121,6 +122,18 @@ section#capy-diet p {
 
 }
 
+#inter {
+    display: inline-block;
+    background-color: rgb(67, 113, 211);
+    color: white;
+    border: 1px solid rgb(19, 52, 141);
+    border-radius: 50%;
+    padding: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
+    cursor: pointer;
+}
+
 div#background {
     background: white url("../imagens/forest2.jpg") no-repeat bottom center;
     background-size: cover;
@@ -146,6 +159,11 @@ div#plant {
     top: 50%;
 }
 
+div#help-box {    
+    position: absolute;
+    width: 15%;
+}
+
 div#bckg {
     background: white url("../imagens/lake.jpg") no-repeat center center;
     background-size: contain;
@@ -167,7 +185,12 @@ div#imgs {
     top: 9%;
     left: 13%;
 }
-    
+
+div#vd {
+    margin: auto;
+    background-color: blue;
+}
+
 .card {
     background-color: #fff;
     margin: 10px;
@@ -204,4 +227,8 @@ div#imgs {
 
 .hover {
     transform: scale(1.1);
+}
+
+.transition {
+    transition: 0.5s;
 }

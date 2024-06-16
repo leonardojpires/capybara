@@ -72,3 +72,26 @@ cards.forEach(card => {
     card.addEventListener("mouseover", handleMouseOver);
     card.addEventListener("mouseout", handleMouseOut);
 })
+
+// DIV ON MOUSE OVER
+document.addEventListener("DOMContentLoaded", function() {
+    const help_box = document.getElementById("help-box");
+    const inter = document.getElementById("inter");
+
+    inter.addEventListener("mouseover", function() {
+        help_box.style.display = "block";
+    })
+
+    inter.addEventListener("mouseout", function() {
+        help_box.style.display = "none";
+    })
+
+    inter.addEventListener("mousemove", function(e) {
+        const mouseX = e.pageX;
+        const mouseY = e.pageY;
+
+        const offset = "70";
+        help_box.style.left = mouseX + "px";
+        help_box.style.top = (mouseY - offset) + "px";
+    })
+})
