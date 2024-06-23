@@ -74,24 +74,55 @@ cards.forEach(card => {
 })
 
 // DIV ON MOUSE OVER
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
     const help_box = document.getElementById("help-box");
+    const help_window = document.getElementById("help-window");
     const inter = document.getElementById("inter");
 
-    inter.addEventListener("mouseover", function() {
-        help_box.style.display = "block";
-    })
+    let offset = 70;
+    let mediaQuery = window.matchMedia("(max-width: 616px)");
 
-    inter.addEventListener("mouseout", function() {
-        help_box.style.display = "none";
-    })
 
-    inter.addEventListener("mousemove", function(e) {
+    const checkMediaQuery = () => {
+        if (window.matchMedia("(max-width: 616px)").matches) {
+            offset = 100;
+        }
+        else {
+            offset = 70;
+        }
+    }
+
+    checkMediaQuery();
+
+    window.matchMedia("(max-width: 616px)").addListener(checkMediaQuery);
+
+    inter.addEventListener("mouseover", () => help_box.style.display = "block");
+
+    inter.addEventListener("mouseout", () =>  help_box.style.display = "none");
+
+    inter.addEventListener("mousemove", e => {
         const mouseX = e.pageX;
         const mouseY = e.pageY;
 
-        const offset = "70";
         help_box.style.left = mouseX + "px";
         help_box.style.top = (mouseY - offset) + "px";
     })
-})
+
+    const handleClick = () => {
+       help_window.style.display = 'block';
+    }
+
+    if (mediaQuery.matches) {
+        inter.addEventListener("click", handleClick);
+    }
+
+    mediaQuery.addListener((e) => {
+        if (e.matches) {
+            inter.addEventListener("click", handleClick);
+        }
+        else {
+            inter.removeEventListener("click", handleClick);
+            help_window.style.display = "none";
+        }
+    });
+});
