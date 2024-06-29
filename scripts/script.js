@@ -1,5 +1,6 @@
 var plant = document.getElementById("plant");
-var capybara = document.getElementById("capybara-div")
+var capybara = document.getElementById("capybara-div");
+var main = document.getElementById("main")
 
 var feed_capy= document.getElementById("feed-capy");
 var hidden_section = document.getElementById("hidden-section");
@@ -12,10 +13,10 @@ plant.onmousedown = function(event) {
     plant.style.zIndex = "1000";
 
     document.body.append(plant);
-
+    
     function moveAt(pageX, pageY) {
         plant.style.left = pageX - plant.offsetWidth / 2 + "px";
-        plant.style.top= pageY - plant.offsetHeight / 1.5 + "px";
+        plant.style.top= pageY - plant.offsetHeight / 1.6 + "px";
     }
 
     moveAt(event.pageX, event.pageY);
@@ -74,10 +75,13 @@ cards.forEach(card => {
 })
 
 // DIV ON MOUSE OVER
+
+const help_box = document.getElementById("help-box");
+const help_window = document.getElementById("help-window");
+const inter = document.getElementById("inter");
+
 document.addEventListener("DOMContentLoaded", () => {
-    const help_box = document.getElementById("help-box");
-    const help_window = document.getElementById("help-window");
-    const inter = document.getElementById("inter");
+
 
     let offset = 70;
     let mediaQuery = window.matchMedia("(max-width: 616px)");
@@ -109,7 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     const handleClick = () => {
-       help_window.style.display = 'block';
+        help_window.style.visibility = 'visible';
+        help_window.style.opacity = '1';
     }
 
     if (mediaQuery.matches) {
@@ -122,7 +127,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else {
             inter.removeEventListener("click", handleClick);
-            help_window.style.display = "none";
+            help_window.style.visibility = 'hidden';
+            help_window.style.opacity = '0';
         }
     });
 });
+
+function closeWindow() {
+    help_window.style.visibility = 'hidden';
+    help_window.style.opacity = '0';
+}
