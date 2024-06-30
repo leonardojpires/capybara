@@ -137,3 +137,24 @@ function closeWindow() {
     help_window.style.visibility = 'hidden';
     help_window.style.opacity = '0';
 }
+
+// ------------------------------------------
+let menuLinks = document.getElementById('links-menu');
+
+document.getElementById('burger-menu').addEventListener('click', () => {
+    if (menuLinks.style.display === 'flex') {
+        menuLinks.style.display = 'none';
+    }
+    else {
+        menuLinks.style.display = 'flex';
+    }
+});
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+        menuLinks.style.display = "flex";
+    }
+    else {
+        menuLinks.style.display = "none";
+    }
+});
