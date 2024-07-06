@@ -87,6 +87,15 @@ nav a:hover::after {
     transition: 0.5s;
 }
 
+.active {
+    background-color: black;
+    color: white;
+}
+
+.active:hover {
+    color: black;
+}
+
 .burger-menu {
     display: none;
     font-size: 24px;
@@ -122,8 +131,8 @@ main {
 }
 
 main img {
-    width: auto;
-    height: auto;
+    width: 500px;
+    height: 500px;
 }
 
 main h1 {
@@ -145,6 +154,7 @@ main p {
     text-align: justify;
     text-indent: 50px;
     font-family: "Acme", Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
 }
 
 main section {
@@ -156,7 +166,7 @@ section#introduction img, section#introduction p {
 }
 
 section#capy-diet img {
-    width: 75%;
+    width: 95%;
     margin: 10px;
     box-shadow: 0px 0px 10px 4px white;
 }
@@ -385,5 +395,4 @@ footer a:hover {
     background: #ff5b5b;
     color: #174ea6;
     transition: 0.2s;
-  }
-  
+}
