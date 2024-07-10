@@ -124,13 +124,16 @@
     }
 
     .card {
-        width: 170px;
-        height: 170px;
+        width: 150px;
+        height: 150px;
     }
 
     .img-v {
         display: none;
         width: 10px;   
     }
-    
+
+    div#help-box {
+        display: none;
+    }
 }

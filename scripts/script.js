@@ -1,59 +1,79 @@
-var plant = document.getElementById("plant");
-var capybara = document.getElementById("capybara-div");
-var main = document.getElementById("main")
+// --------------- PLANT DRAG AND DROP WITH COLLISION DETECTION ---------------
 
-var feed_capy= document.getElementById("feed-capy");
-var hidden_section = document.getElementById("hidden-section");
+const plant = document.getElementById("plant");
+const capybara = document.getElementById("capybara-div");
+const main = document.getElementById("main");
+
+const feedCapy = document.getElementById("feed-capy");
+const hiddenSection = document.getElementById("hidden-section");
 
 let plantWidth = plant.offsetWidth;
 let plantHeight = plant.offsetHeight;
 
-plant.onmousedown = function(event) {
+function moveAt(pageX, pageY) {
+    plant.style.left = pageX - plant.offsetWidth / 2 + "px";
+    plant.style.top = pageY - plant.offsetHeight / 1.6 + "px";
+}
+
+function onMouseMove(event) {
+    moveAt(event.pageX, event.pageY);
+    checkCollision();
+}
+
+function onTouchMove(event) {
+    let touch = event.touches[0];
+    moveAt(touch.pageX, touch.pageY);
+    checkCollision();
+}
+
+function checkCollision() {
+    let plantRect = plant.getBoundingClientRect();
+    let capybaraRect = capybara.getBoundingClientRect();
+
+    if (plantRect.left < capybaraRect.left + capybaraRect.width - 200 &&
+        plantRect.left + plantRect.width > capybaraRect.left + 150 &&
+        plantRect.top < capybaraRect.top + capybaraRect.height - 200 &&
+        plantRect.top + plantRect.height > capybaraRect.top + 200) {
+        plant.style.display = "none";
+        feedCapy.style.display = "none";
+        hiddenSection.style.display = "block";
+    }
+}
+
+plant.onmousedown = function (event) {
     plant.style.position = "absolute";
     plant.style.zIndex = "1000";
-
     document.body.append(plant);
-    
-    function moveAt(pageX, pageY) {
-        plant.style.left = pageX - plant.offsetWidth / 2 + "px";
-        plant.style.top= pageY - plant.offsetHeight / 1.6 + "px";
-    }
 
     moveAt(event.pageX, event.pageY);
+    document.addEventListener("mousemove", onMouseMove);
 
-    function OnMouseMove(event) {
-        moveAt(event.pageX, event.pageY);
-        checkCollision();
-    }
-
-    document.addEventListener("mousemove", OnMouseMove);
-
-    plant.onmouseup = function() {
-        document.removeEventListener("mousemove", OnMouseMove);
+    plant.onmouseup = function () {
+        document.removeEventListener("mousemove", onMouseMove);
         plant.onmouseup = null;
-    }
+    };
+};
 
-    function checkCollision() {
-        var plantRect = plant.getBoundingClientRect();
-        var capybaraRect = capybara.getBoundingClientRect();
+plant.ontouchstart = function (event) {
+    plant.style.position = "absolute";
+    plant.style.zIndex = "1000";
+    document.body.append(plant);
 
-        if (plantRect.left < capybaraRect.left + capybaraRect.width - 200 &&
-            plantRect.left + plantRect.width > capybaraRect.left + 150  &&
-            plantRect.top < capybaraRect.top + capybaraRect.height - 200  &&
-            plantRect.top + plantRect.height > capybaraRect.top + 200 ) 
-            {
-            plant.style.display = "none";
-            feed_capy.style.display = "none";
-            hidden_section.style.display = "block";
-        }
-    }
-}
+    let touch = event.touches[0];
+    moveAt(touch.pageX, touch.pageY);
+    document.addEventListener("touchmove", onTouchMove);
 
-plant.ondragstart = function() {
+    plant.ontouchend = function () {
+        document.removeEventListener("touchmove", onTouchMove);
+        plant.ontouchend = null;
+    };
+};
+
+plant.ondragstart = function () {
     return false;
-}
+};
 
-// ------------------------------------------
+// ----------------------- CARD HOVER EFFECTS -----------------------
 
 const cards = document.querySelectorAll(".card");
 
@@ -72,80 +92,87 @@ function handleMouseOut(event) {
 cards.forEach(card => {
     card.addEventListener("mouseover", handleMouseOver);
     card.addEventListener("mouseout", handleMouseOut);
-})
+});
 
-// DIV ON MOUSE OVER
+// -------------------- HELP BOX AND HELP WINDOW --------------------
 
-const help_box = document.getElementById("help-box");
-const help_window = document.getElementById("help-window");
+const helpBox = document.getElementById("help-box");
+const helpWindow = document.getElementById("help-window");
 const inter = document.getElementById("inter");
 
 document.addEventListener("DOMContentLoaded", () => {
-
-
     let offset = 70;
-    let mediaQuery = window.matchMedia("(max-width: 616px)");
-
+    const mediaQuery616 = window.matchMedia("(max-width: 616px)");
+    const mediaQuery998 = window.matchMedia("(max-width: 998px)");
 
     const checkMediaQuery = () => {
-        if (window.matchMedia("(max-width: 616px)").matches) {
+        if (mediaQuery616.matches) {
             offset = 100;
-        }
-        else {
+        } else {
             offset = 70;
         }
-    }
+
+        if (mediaQuery998.matches) {
+            helpBox.style.display = 'none';
+        } else {
+            helpBox.style.display = 'block';
+        }
+    };
 
     checkMediaQuery();
 
-    window.matchMedia("(max-width: 616px)").addListener(checkMediaQuery);
+    mediaQuery616.addListener(checkMediaQuery);
+    mediaQuery998.addListener(checkMediaQuery);
 
-    inter.addEventListener("mouseover", () => help_box.style.display = "block");
+    inter.addEventListener("mouseover", () => {
+        if (!mediaQuery998.matches) {
+            helpBox.style.display = "block";
+        }
+    });
 
-    inter.addEventListener("mouseout", () =>  help_box.style.display = "none");
+    inter.addEventListener("mouseout", () => helpBox.style.display = "none");
 
     inter.addEventListener("mousemove", e => {
         const mouseX = e.pageX;
         const mouseY = e.pageY;
 
-        help_box.style.left = mouseX + "px";
-        help_box.style.top = (mouseY - offset) + "px";
-    })
+        helpBox.style.left = mouseX + "px";
+        helpBox.style.top = (mouseY - offset) + "px";
+    });
 
     const handleClick = () => {
-        help_window.style.visibility = 'visible';
-        help_window.style.opacity = '1';
-    }
+        helpWindow.style.visibility = 'visible';
+        helpWindow.style.opacity = '1';
+    };
 
-    if (mediaQuery.matches) {
+    if (mediaQuery616.matches) {
         inter.addEventListener("click", handleClick);
     }
 
-    mediaQuery.addListener((e) => {
+    mediaQuery616.addListener((e) => {
         if (e.matches) {
             inter.addEventListener("click", handleClick);
-        }
-        else {
+        } else {
             inter.removeEventListener("click", handleClick);
-            help_window.style.visibility = 'hidden';
-            help_window.style.opacity = '0';
+            helpWindow.style.visibility = 'hidden';
+            helpWindow.style.opacity = '0';
         }
     });
 });
 
 function closeWindow() {
-    help_window.style.visibility = 'hidden';
-    help_window.style.opacity = '0';
+    helpWindow.style.visibility = 'hidden';
+    helpWindow.style.opacity = '0';
 }
 
-// ------------------------------------------
-let menuLinks = document.getElementById('links-menu');
+// ----------------------- BURGER MENU TOGGLE -----------------------
+
+const menuLinks = document.getElementById('links-menu');
 
 document.getElementById('burger-menu').addEventListener('click', () => {
     if (menuLinks.style.display === 'flex') {
         menuLinks.style.display = 'none';
-    }
-    else {
+    } else {
         menuLinks.style.display = 'flex';
     }
 });
@@ -153,8 +180,7 @@ document.getElementById('burger-menu').addEventListener('click', () => {
 window.addEventListener('resize', () => {
     if (window.innerWidth >= 768) {
         menuLinks.style.display = "flex";
-    }
-    else {
+    } else {
         menuLinks.style.display = "none";
     }
 });
